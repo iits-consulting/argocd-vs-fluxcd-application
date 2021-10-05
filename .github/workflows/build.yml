@@ -1,0 +1,36 @@
+name: Build and push
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Dockerfile'
+      - 'main.go'
+
+jobs:
+  compile:
+    runs-on: ubuntu-20.04
+    outputs:
+      new_version: ${{ steps.bump_semver.outputs.new_version }}
+    name: Build and push docker image
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+      - name: Set build version
+        id: version_step
+        run: |
+          echo "NEW_VERSION=$(echo "1.0.${{ github.run_number }}")" >> $GITHUB_ENV
+      - name: Login to Azure registry
+        if: success()
+        uses: docker/login-action@v1
+        with:
+          registry: iitsc.azurecr.io
+          username: ${{ secrets.AZURE_DOCKER_USERNAME }}
+          password: ${{ secrets.AZURE_DOCKER_PASSWORD }}
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: iitsc.azurecr.io/images/argocd-vs-fluxcd-application:${{ env.NEW_VERSION }}
