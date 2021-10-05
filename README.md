@@ -1,4 +1,4 @@
-# REPLACEME
+# argocd-vs-fluxcd-application
 ### Description
 This is a project with application, based on:
  - Go?
