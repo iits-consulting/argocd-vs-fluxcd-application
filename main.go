@@ -46,8 +46,8 @@ func main() {
 func writeAndRead(c *redis.Client) {
 	randomize := rand.New(rand.NewSource(time.Now().UnixNano()))
 	strconv.Itoa(randomize.Intn(99))
-	
-	json, err := json.Marshal(Author{Name: "User-"+strconv.Itoa(randomize.Intn(99)), Age: randomize.Intn(99)})
+
+	json, err := json.Marshal(Author{Name: "User-" + strconv.Itoa(randomize.Intn(99)), Age: randomize.Intn(99)})
 	if err != nil {
 		fmt.Println(err)
 	}

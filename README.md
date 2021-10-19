@@ -1,9 +1,17 @@
 # argocd-vs-fluxcd-application
 Application that post random object to the Redis, read and output it to the STDOUT
 
+### How to start
+```shell
+docker run redis
+```
+```shell
+docker run -e REDIS_URL=172.17.0.2:6379 \
+iitsc.azurecr.io/images/argocd-vs-fluxcd-application:latest
+```
 ### Description
 This is a project with application, based on:
- - Go?
+ - Go
  - **Redis** as dependency
  - [**GitHub Actions**](https://docs.github.com/en/actions)
  - [**OTC Cloud Container Engine**](https://open-telekom-cloud.com/en/products-services/cloud-container-engine) <br>
