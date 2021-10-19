@@ -1,4 +1,6 @@
 # argocd-vs-fluxcd-application
+Application that post random object to the Redis, read and output it to the STDOUT
+
 ### Description
 This is a project with application, based on:
  - Go?

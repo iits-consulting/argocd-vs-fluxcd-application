@@ -1,4 +1,4 @@
-name: Build and push
+name: Build and push latest
 
 on:
   push:
@@ -17,10 +17,6 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2
-      - name: Set build version
-        id: version_step
-        run: |
-          echo "NEW_VERSION=$(echo "1.0.${{ github.run_number }}")" >> $GITHUB_ENV
       - name: Login to Azure registry
         if: success()
         uses: docker/login-action@v1
@@ -33,4 +29,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: iitsc.azurecr.io/images/argocd-vs-fluxcd-application:${{ env.NEW_VERSION }}
+          tags: iitsc.azurecr.io/images/argocd-vs-fluxcd-application:latest
