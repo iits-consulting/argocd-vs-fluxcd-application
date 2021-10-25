@@ -17,11 +17,6 @@ jobs:
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v2
-      - name: Set build version
-        id: version_step
-        run: |
-          SHA=$(git rev-parse --short ${{ github.event.pull_request.head.sha || github.sha }})
-          echo "NEW_VERSION=$(echo "$SHA")" >> $GITHUB_ENV
       - name: Login to Azure registry
         if: success()
         uses: docker/login-action@v1
@@ -34,4 +29,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: iitsc.azurecr.io/images/argocd-vs-fluxcd-application:dev-${{ env.NEW_VERSION }}
+          tags: iitsc.azurecr.io/images/argocd-vs-fluxcd-application:0.${{ github.run_id }}

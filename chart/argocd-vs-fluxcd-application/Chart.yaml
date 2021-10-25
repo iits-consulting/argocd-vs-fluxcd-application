@@ -9,4 +9,3 @@ dependencies:
   - name: redis
     version: 15.3.0
     repository: https://charts.bitnami.com/bitnami
-
